@@ -12,15 +12,13 @@ class RecipeController < ApplicationController
     @recipe.name = params[:name]
     @recipe.ingredients = params[:ingredients]
     @recipe.cook_time = params[:cook_time]
-    if @recipe.save
-      redirect "/recipes/#{@recipe.id}"
-    else
-      erb :'recipes/new'
-    end
+    redirect "/recipes/#{@recipe.id}" if @recipe.save
+    erb :'recipes/new'
   end
 
   get '/recipes/:id' do
-    @recipe = Recipe.find(params[:id])
+    @recipe = Recipe.find_by(id: params[:id])
     erb :'recipes/show' if @recipe
+    redirect '/recipes'
   end
 end

@@ -18,7 +18,26 @@ class RecipeController < ApplicationController
 
   get '/recipes/:id' do
     @recipe = Recipe.find_by(id: params[:id])
-    erb :'recipes/show' if @recipe
+    if @recipe
+      erb :'recipes/show'
+    else
+      redirect '/recipes'
+    end
+  end
+
+  get '/recipes/:id/edit' do
+    @recipe = Recipe.find_by(id: params[:id])
+    if @recipe
+      erb :'recipes/edit'
+    else
+      redirect '/recipes'
+    end
+  end
+
+  delete '/recipes/:id' do
+    @recipe = Recipe.find_by(id: params[:id])
+    @recipe.delete
     redirect '/recipes'
   end
+
 end

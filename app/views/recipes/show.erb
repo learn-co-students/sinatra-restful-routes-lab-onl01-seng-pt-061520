@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= @recipe.name %></title>
+</head>
+<body>
+	<h1><%= @recipe.name %></h1>
+	<% for column in @recipe.ingredients.split("\n") %>
+		<p><%= column %></p>
+	<% end %>
+	<h3><%= @recipe.cook_time %></h3>
+	<form method="POST" action=<%= "/recipes/#{@recipe.id}" %>>
+		<input type="hidden" name="_method" value="DELETE">
+		<input type="submit" name="delete" value="delete" id="delete">
+	</form>
+</body>
+</html>
